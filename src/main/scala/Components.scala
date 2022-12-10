@@ -1,15 +1,23 @@
-import akka.actor.typed.ActorSystem
-import akka.actor.typed.scaladsl.Behaviors
-
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
-import scala.io.StdIn
 
-trait MessageRouting {
-  val route = path("hello") { complete("OK") }
-}
+import spray.json.DefaultJsonProtocol._
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 
-trait Context {
-  implicit val system = ActorSystem(Behaviors.empty, "my-system")
-  implicit val executionContext = system.executionContext
+import akka.http.scaladsl.server.Route
+
+trait MessageRouting extends JsonMarshallerComponent {
+  val route: Route = pathPrefix("message") {
+    createNewMessage
+  }
+
+  val createNewMessage: Route = pathEnd {
+    post {
+      entity(as[Message]) { newMessage =>
+        println(newMessage)
+        complete(StatusCodes.OK)
+      }
+    }
+  }
 }
