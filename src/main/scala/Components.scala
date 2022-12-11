@@ -7,13 +7,33 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 
 import akka.http.scaladsl.server.Route
 
-trait MessageRouting extends JsonMarshallerComponent {
+trait MessageRouting extends JsonMarshallerComponent with Repository {
   val route: Route = pathPrefix("message") {
-    ping ~ createNewMessage
+    ping ~ aMessage ~ allMessages ~ createNewMessage
   }
 
-  val ping: Route = pathEnd {
+  val ping: Route = path("ping") {
     get { complete("OK") }
+  }
+
+  val allMessages: Route = pathEnd {
+    get {
+      val mayBeAllMessages = getAllMessages()
+      onSuccess(mayBeAllMessages) {
+        case messages: Seq[Message] => complete(messages.toList)
+        case _                      => complete(StatusCodes.NotFound)
+      }
+    }
+  }
+
+  val aMessage: Route = path(LongNumber) { targetID =>
+    get {
+      val mayBeAMessage = getAMessage(targetID)
+      onSuccess(mayBeAMessage) {
+        case messages: Seq[Message] => complete(messages.toSet.head)
+        case _                      => complete(StatusCodes.NotFound)
+      }
+    }
   }
 
   val createNewMessage: Route = pathEnd {
