@@ -1,1 +1,1 @@
-case class Message(id: Long, sender: String, message: String)
+case class Message(sender: String, content: String, id: Long = 0L)
