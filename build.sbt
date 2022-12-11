@@ -1,6 +1,15 @@
 scalaVersion := "2.13.8"
 val AkkaVersion = "2.6.8"
 val AkkaHttpVersion = "10.2.10"
+
+enablePlugins(
+  JavaAppPackaging,
+  DockerPlugin
+)
+
+Compile / mainClass := Some("AkkaHttpSimple")
+Docker / packageName := "part2"
+
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
   "com.typesafe.akka" %% "akka-stream" % AkkaVersion,

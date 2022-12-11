@@ -9,6 +9,6 @@ object AkkaHttpSimple
 
   val bindingFuture: Future[Http.ServerBinding] =
     Http().newServerAt("localhost", 8080).bind(route)
-  StdIn.readLine()
-  bindingFuture.flatMap(_.unbind()).onComplete(_ => system.terminate())
+  // StdIn.readLine()
+  // bindingFuture.flatMap(_.unbind()).onComplete(_ => system.terminate())
 }
