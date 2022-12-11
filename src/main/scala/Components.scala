@@ -9,7 +9,11 @@ import akka.http.scaladsl.server.Route
 
 trait MessageRouting extends JsonMarshallerComponent {
   val route: Route = pathPrefix("message") {
-    createNewMessage
+    ping ~ createNewMessage
+  }
+
+  val ping: Route = pathEnd {
+    get { complete("OK") }
   }
 
   val createNewMessage: Route = pathEnd {
@@ -20,4 +24,10 @@ trait MessageRouting extends JsonMarshallerComponent {
       }
     }
   }
+}
+
+import spray.json.RootJsonFormat
+
+trait JsonMarshallerComponent {
+  implicit val messageFormat: RootJsonFormat[Message] = jsonFormat3(Message)
 }
