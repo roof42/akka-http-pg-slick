@@ -39,8 +39,11 @@ trait MessageRouting extends JsonMarshallerComponent with Repository {
   val createNewMessage: Route = pathEnd {
     post {
       entity(as[Message]) { newMessage =>
-        println(newMessage)
-        complete(StatusCodes.OK)
+        val mayBeResult = createNewMessage(newMessage)
+        onSuccess(mayBeResult) {
+          case id: Option[Int] => complete(id.get.toString)
+          case _               => complete(StatusCodes.InternalServerError)
+        }
       }
     }
   }
