@@ -29,7 +29,7 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpV
 mainClass in (Compile, run) := Some("AkkaHttpSimple")
 // set the main class for 'sbt runLocal'
 TaskKey[Unit]("runLocal") := (runMain in Compile)
-  .toTask(" BasicHttp")
+  .toTask(" RunLocal")
   .value
 // set the main class for 'sbt initData'
 TaskKey[Unit]("initDatabase") := (runMain in Compile)

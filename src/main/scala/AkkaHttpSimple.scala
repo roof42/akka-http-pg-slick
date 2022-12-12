@@ -12,7 +12,7 @@ object AkkaHttpSimple
   val bindingFuture: Future[Http.ServerBinding] =
     Http().newServerAt("0.0.0.0", 8080).bind(route)
   bindingFuture.onComplete {
-    case Success(_) => println(s"Started!")
+    case Success(_) => println(s"<-------Started------>")
     case Failure(e) => println("Failed to start ... ", e)
   }
 }
