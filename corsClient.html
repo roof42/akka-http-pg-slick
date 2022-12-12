@@ -1,0 +1,25 @@
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>My test page</title>
+    <script>
+        function main() {   
+            console.log("basic-cors-test");
+            const Http = new XMLHttpRequest();
+            const url='http://localhost:8080/message/ping';
+            Http.open("GET", url);
+            //Http.setRequestHeader("Authorization", "Basic " + btoa("roofimon:p4ssw0rd"));
+            Http.send();
+            Http.onreadystatechange = (e) => {
+                console.log(Http.responseText)
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <button type="button" onclick="main()">
+        Do something 
+    </button>
+  </body>
+</html>
