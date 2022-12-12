@@ -6,7 +6,8 @@ enablePlugins(
   JavaAppPackaging,
   DockerPlugin
 )
-
+dockerExposedPorts := Seq(8080)
+javaOptions in Universal ++= Seq("-J-Xmx64m", "-J-Xms64m", "-jvm-debug 12345")
 Compile / mainClass := Some("AkkaHttpSimple")
 Docker / packageName := "part2"
 
@@ -18,7 +19,8 @@ libraryDependencies ++= Seq(
   "com.h2database" % "h2" % "2.1.214",
   "ch.qos.logback" % "logback-classic" % "1.4.5",
   "org.postgresql" % "postgresql" % "42.5.1",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1"
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1",
+  "ch.megard" %% "akka-http-cors" % "1.1.3"
 )
 libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "4.6.0"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion
