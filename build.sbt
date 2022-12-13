@@ -2,6 +2,7 @@ scalaVersion := "2.13.10"
 val AkkaVersion = "2.6.8"
 val AkkaHttpVersion = "10.2.10"
 
+//Dockerize
 enablePlugins(
   JavaAppPackaging,
   DockerPlugin
@@ -10,6 +11,7 @@ dockerExposedPorts := Seq(8080)
 javaOptions in Universal ++= Seq("-J-Xmx64m", "-J-Xms64m", "-jvm-debug 12345")
 Compile / mainClass := Some("AkkaHttpSimple")
 Docker / packageName := "part2"
+//Dockerize
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
