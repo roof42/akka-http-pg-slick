@@ -16,11 +16,11 @@ trait MessageRouting extends JsonMarshallerComponent with Repository {
     }
   }
 
-  val ping: Route = path("ping") {
+  private val ping: Route = path("ping") {
     get { complete("OK") }
   }
 
-  val allMessages: Route = pathEnd {
+  private val allMessages: Route = pathEnd {
     get {
       val mayBeAllMessages = getAllMessages()
       onSuccess(mayBeAllMessages) {
@@ -30,7 +30,7 @@ trait MessageRouting extends JsonMarshallerComponent with Repository {
     }
   }
 
-  val aMessage: Route = path(LongNumber) { targetID =>
+  private val aMessage: Route = path(LongNumber) { targetID =>
     get {
       val mayBeAMessage = getAMessage(targetID)
       onSuccess(mayBeAMessage) {
@@ -40,7 +40,7 @@ trait MessageRouting extends JsonMarshallerComponent with Repository {
     }
   }
 
-  val createNewMessage: Route = pathEnd {
+  private val createNewMessage: Route = pathEnd {
     post {
       entity(as[Message]) { newMessage =>
         val mayBeResult = createNewMessage(newMessage)

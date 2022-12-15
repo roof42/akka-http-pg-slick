@@ -11,7 +11,7 @@ dockerExposedPorts := Seq(8080)
 javaOptions in Universal ++= Seq("-J-Xmx64m", "-J-Xms64m", "-jvm-debug 12345")
 Compile / mainClass := Some("AkkaHttpSimple")
 Docker / packageName := "part2"
-//Dockerize
+//Dockerize//
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
