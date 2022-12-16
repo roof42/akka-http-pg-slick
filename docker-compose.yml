@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  akka-api:
+    image: "part2:0.1.0-SNAPSHOT"
+    ports:
+      - "8080:8080"
+    networks: 
+      - cluster-network  
+      
+  postgres-db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=my_secret
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks: 
+      - cluster-network  
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  cluster-network:
+    driver: bridge   
