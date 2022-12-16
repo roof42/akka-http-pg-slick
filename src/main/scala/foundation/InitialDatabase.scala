@@ -1,13 +1,17 @@
 package foundation
 import slick.dbio.DBIO
+import slick.jdbc.PostgresProfile
 import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.Await
 import scala.concurrent.duration.DurationInt
-import message.{SlickComponent, Message}
+import message.{SlickComponent, Message, MessageTable}
 
 // Main class for 'sbt initData'
-object InitialDatabase extends App with SlickComponent {
+object InitialDatabase extends App {
+  val db: PostgresProfile.backend.Database =
+    Database.forConfig("basicSlickLocalhost")
+  lazy val messages: TableQuery[MessageTable] = TableQuery[MessageTable]
   private def exec[T](program: DBIO[T]): T =
     Await.result(db.run(program), 2.second)
 

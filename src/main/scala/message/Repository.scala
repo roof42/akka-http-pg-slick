@@ -3,6 +3,7 @@ import scala.concurrent.Future
 import slick.jdbc.PostgresProfile.api._
 
 trait Repository extends SlickComponent {
+  lazy val messages: TableQuery[MessageTable] = TableQuery[MessageTable]
   def getAllMessages(): Future[Seq[Message]] =
     db.run(messages.result)
 
