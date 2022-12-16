@@ -30,10 +30,10 @@ mainClass in (Compile, run) := Some("AkkaHttpSimple")
 
 // set the main class for 'sbt runLocal'
 TaskKey[Unit]("runLocal") := (runMain in Compile)
-  .toTask(" RunLocal")
+  .toTask(" foundation.RunLocal")
   .value
 
 // set the main class for 'sbt initData'
-TaskKey[Unit]("initDatabase") := (runMain in Compile)
-  .toTask(" InitialDatabase")
+TaskKey[Unit]("initialDatabase") := (runMain in Compile)
+  .toTask(" foundation.InitialDatabase")
   .value

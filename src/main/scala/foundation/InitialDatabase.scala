@@ -1,8 +1,10 @@
+package foundation
 import slick.dbio.DBIO
 import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.Await
 import scala.concurrent.duration.DurationInt
+import message.{SlickComponent, Message}
 
 // Main class for 'sbt initData'
 object InitialDatabase extends App with SlickComponent {

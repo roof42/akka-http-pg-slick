@@ -1,3 +1,4 @@
+package message
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
@@ -7,8 +8,9 @@ import spray.json.DefaultJsonProtocol._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 
 import akka.http.scaladsl.server.Route
+import message._
 
-trait MessageRouting extends JsonMarshallerComponent with Repository {
+trait Routing extends JsonComponent with Repository {
 
   val route: Route = cors() {
     pathPrefix("message") {
@@ -55,6 +57,6 @@ trait MessageRouting extends JsonMarshallerComponent with Repository {
 
 import spray.json.RootJsonFormat
 
-trait JsonMarshallerComponent {
+trait JsonComponent {
   implicit val messageFormat: RootJsonFormat[Message] = jsonFormat3(Message)
 }

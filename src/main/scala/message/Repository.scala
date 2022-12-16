@@ -1,3 +1,4 @@
+package message
 import scala.concurrent.Future
 import slick.jdbc.PostgresProfile.api._
 
