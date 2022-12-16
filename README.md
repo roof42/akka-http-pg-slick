@@ -2,7 +2,7 @@
 Vary simple project that use for explain how to put Akka Http and Slick together.
 # Using docker compose
 0. Clone source from repo
-> git clone git@gitlab.com:ruvlab/basic-slick.git
+> git clone https://github.com/roof42/akka-http-pg-slick.git
 1. Build docker image
 > sbt docker:publishLocal
 2. Start compose
@@ -16,7 +16,7 @@ Vary simple project that use for explain how to put Akka Http and Slick together
 
 # Basic Akka HTTP with Slick and Postgres
 0. Clone source from repo
-> git clone git@gitlab.com:ruvlab/basic-slick.git
+> git clone https://github.com/roof42/akka-http-pg-slick.git
 1. Start Postgres
 > docker run --name some-postgres -e POSTGRES_PASSWORD=my_secret -p 5432:5432 -d postgres 
 2. Create database and initial data
